@@ -27,7 +27,7 @@ public class AppData
       
       registrationData.put("data7", new RegistrationEntity("female", "Familienname", "Vorname", "Geburtsname", "10.01.2001", "Geburtsort", "test@test.com", ""));
       
-      registrationData.put("data8", new RegistrationEntity("female", "Lang", "Friedrich Johann", "m", "02.02.1948", "Bayreuth", "thenextfreelancer@gmail.com", "thenextfreelancer@gmail.com"));
+      registrationData.put("data8", new RegistrationEntity("female", "Lang", "Friedrich Johann", "m", "02.02.1948", "Bayreuth", "test@test.com", "test@test.com"));
    }
    
    public static RegistrationEntity get(String key){
