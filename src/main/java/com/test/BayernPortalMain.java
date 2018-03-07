@@ -8,10 +8,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.test.gmail.GmailLogin;
+
 public class BayernPortalMain
 {
    public static WebDriver driver;
-
+   
    @BeforeClass(alwaysRun = true)
    public void setUp() throws Exception
    {
@@ -35,7 +37,9 @@ public class BayernPortalMain
       suite.fillRegisterInfoAndSubmit(AppData.get("data7"));
       suite.fillRegisterInfoAndSubmit(AppData.get("data8")); // real data
       
-      
+      GmailLogin gmail = new GmailLogin();
+      gmail.setUp();
+      gmail.login();
    }
    
    @AfterClass(alwaysRun = true)
