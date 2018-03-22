@@ -102,8 +102,14 @@ public class RegistrationSuite implements Module
          
          try {
             WebElement registerFormTmp = Util.fluentWait(By.className("RegisterPage"), driver, 30, 5);
-            registerFormTmp.findElement(By.xpath("form/dl/dt/span"));
-            Assert.assertTrue(true);
+            String error = printErrorLog(registerFormTmp);
+            if(!"".equals(error)) {
+               System.out.println("Error Message on Web Page: "+error);
+               noCaptchaErrorMsgHandler(registerFormTmp);
+               Assert.assertTrue(true);
+            } else {
+                 // No Error Message
+            }
          } catch(NoSuchElementException e) {
             throw e;
          } catch(Exception e) {
@@ -113,6 +119,27 @@ public class RegistrationSuite implements Module
       catch (Exception e)
       {
          e.printStackTrace();
+      }
+   }
+   
+   private String printErrorLog(WebElement registerForm) {
+      List<WebElement> errorLabels = registerForm.findElements(By.className("rich-message-label"));
+      for(WebElement errorEl: errorLabels) {
+         String errorMsg = errorEl.getText();
+         if(!"".equals(errorMsg)) {
+            return errorMsg;
+         }
+      }
+      return "";
+   }
+   
+   private void noCaptchaErrorMsgHandler(WebElement registerForm) {
+      List<WebElement> errorLabels = registerForm.findElements(By.className("ErrorMessageBlock"));
+      for(WebElement errorEl: errorLabels) {
+         String errorMsg = errorEl.getText();
+         if(errorMsg != null && errorMsg.contains("Bild ein")) {
+            System.out.println("Please enter Captcha as well.");
+         }
       }
    }
 
