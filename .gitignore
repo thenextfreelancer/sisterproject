@@ -11,3 +11,4 @@ error/
 test-output/
 users_180305200941.jpeg
 .classpath
+/target/

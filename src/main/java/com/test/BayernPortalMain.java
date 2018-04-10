@@ -22,9 +22,17 @@ public class BayernPortalMain
       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
       driver.manage().window().maximize();
    }
+   
+   public static void main(String args[]) {
+      System.setProperty("webdriver.chrome.driver", args[0]);
+      driver = new ChromeDriver();
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+      driver.manage().window().maximize();
+      register();
+   }
 
    @Test
-   public void register()
+   public static void register()
    {
       RegistrationSuite suite = new RegistrationSuite();
       suite.init();

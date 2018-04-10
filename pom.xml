@@ -4,42 +4,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>com.test.selenium</groupId>
+    <groupId>com.test</groupId>
     <artifactId>test-project</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <modelVersion>4.0.0</modelVersion>
 
     <name>Selenium Project</name>
     <description>Selenium Project</description>
     <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <!--Dependency Versions-->
-        <selenium.version>3.11.0</selenium.version>
-        <assertj-core.version>3.9.1</assertj-core.version>
-        <testng.version>6.14.2</testng.version>
-        <!--Plugin Versions-->
-        <driver-binary-downloader-maven-plugin.version>1.0.17</driver-binary-downloader-maven-plugin.version>
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
-        <!--Configuration Properties-->
-        <overwrite.binaries>false</overwrite.binaries>
-        <read.timeout>30000</read.timeout>
-        <connection.timeout>40000</connection.timeout>
-        <retry.attempts>4</retry.attempts>
-        <browser>firefox_headless</browser>
-        <threads>1</threads>
-        <remote>false</remote>
-        <seleniumGridURL/>
-        <platform/>
-        <browserVersion/>
-        <proxyEnabled>false</proxyEnabled>
-        <proxyHost/>
-        <proxyPort/>
-    </properties>
 
     <dependencies>
     	<dependency>
@@ -83,62 +55,38 @@
 		    <scope>compile</scope>
 		</dependency>
 	  </dependencies>
-
-    <profiles>
-        <profile>
-            <id>selenium-tests</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <source>${java.version}</source>
-                            <target>${java.version}</target>
-                        </configuration>
-                        <version>${maven-compiler-plugin.version}</version>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven-failsafe-plugin.version}</version>
-                        <configuration>
-                            <parallel>methods</parallel>
-                            <threadCount>${threads}</threadCount>
-                            <systemPropertyVariables>
-                                <browser>${browser}</browser>
-                                <screenshotDirectory>${project.build.directory}/screenshots</screenshotDirectory>
-                                <remoteDriver>${remote}</remoteDriver>
-                                <gridURL>${seleniumGridURL}</gridURL>
-                                <desiredPlatform>${platform}</desiredPlatform>
-                                <desiredBrowserVersion>${browserVersion}</desiredBrowserVersion>
-                                <proxyEnabled>${proxyEnabled}</proxyEnabled>
-                                <proxyHost>${proxyHost}</proxyHost>
-                                <proxyPort>${proxyPort}</proxyPort>
-
-                                <!--Set properties passed in by the driver binary downloader-->
-                                <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
-                                <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
-                                <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
-                                <webdriver.gecko.driver>${webdriver.gecko.driver}</webdriver.gecko.driver>
-                                <webdriver.edge.driver>${webdriver.edge.driver}</webdriver.edge.driver>
-                            </systemPropertyVariables>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <!--This goal makes the build fail if you have test failures-->
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+	  <build>
+		  <plugins>
+		    <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+                <version>3.7.0</version>
+            </plugin>
+		    <plugin>
+		      <artifactId>maven-assembly-plugin</artifactId>
+		      <configuration>
+		        <archive>
+		          <manifest>
+		            <mainClass>com.test.BayernPortalMain</mainClass>
+		          </manifest>
+		        </archive>
+		        <descriptorRefs>
+		          <descriptorRef>jar-with-dependencies</descriptorRef>
+		        </descriptorRefs>
+		      </configuration>
+		      <executions>
+                <execution>
+                   <phase>install</phase>
+                   <goals>
+                       <goal>single</goal>
+                   </goals>
+                </execution>
+              </executions>
+		    </plugin>
+		  </plugins>
+		</build>
 </project>
