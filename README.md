@@ -1,16 +1,44 @@
-# Selenium Automation Project
-Selenium AUTOMATION project based on selenium java for windows and chrome browser
+# BayernId Testing Tool
+This project is a Selenium AUTOMATION project based on selenium java for windows.
 
-The solution is for Latest Chrome version.
+It is for testing the registration page here: 
+
+> https://infra-pre.buergerserviceportal.de/bayern/freistaat/register
+
 
 # Pre-requisites
-> System must have java 1.8 or above installed.
+System must have java 1.8 or above installed.
 
-> User must have an IDE like eclipse to compile and run the problem
+# How to build
+Following steps should be followed to build the project:
+1. Clone the project in local system by following commands:
+
+> git clone https://github.com/thenextfreelancer/sisterproject
+
+2. Go to /path/to/project/sisterproject and run following command
+
+> mvn clean install
+
+3. After running the command, maven build the project.
+
+4. After successful build, user will find following files under target folder
+
+/BayernIdTestingTool-1.0-jar-with-dependencies.jar
+
 
 # How to execute
-It has every dependency included. Run following commands under the project folder:
+The project can be executed in 2 browsers
+1. Chrome
+2. Firefox
 
-	run-app.bat
+Note: Make sure you install latest updated browsers in the system which is selected above.
 
-And follow the instruction pop up in cmd.
+For running the project, go to the target repository by windows console. Run following command from windows console:
+
+For Chrome:
+
+> java -jar BayernIdTestingTool-1.0-jar-with-dependencies.jar --chrome=/path/to/chromedriver.exe
+
+For Firefox:
+
+> java -jar BayernIdTestingTool-1.0-jar-with-dependencies.jar --firefox=/path/to/geckodriver.exe

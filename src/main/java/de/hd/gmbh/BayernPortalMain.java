@@ -57,6 +57,23 @@ public class BayernPortalMain
    }
    
    public static void main(String args[]) throws Exception {
+      
+      if(args.length == 0) {
+         System.out.println("Error: Driver type is not defined.");
+         System.out.println("The command must have the driver type e.g. --chrome=/path/to/chromedriver  or --firefox=/path/to/geckodriver");
+         Util.giveSpaceInLogs(2);
+         System.out.println("System will exit.");
+         throw new Exception("Error: Driver type is not defined.");
+      }
+      
+      if(args.length > 1) {
+         System.out.println("Error: Command not found.");
+         System.out.println("The command must have the driver type e.g. --chrome=/path/to/chromedriver  or --firefox=/path/to/geckodriver");
+         Util.giveSpaceInLogs(2);
+         System.out.println("System will exit.");
+         throw new Exception("Error: Command not found.");
+      }
+      
       if(args[0].contains(chromeIdentifier)) {
          System.setProperty("webdriver.chrome.driver", args[0].replace(chromeIdentifier, ""));
          driver = new ChromeDriver();
