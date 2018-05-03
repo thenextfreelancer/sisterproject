@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.test;
+package de.hd.gmbh;
 
 import java.util.List;
 
@@ -11,8 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.test.Util;
+
 /**
- * @author Moksh
+ * @author Liridon
  *
  */
 public class RegistrationSuite implements Module
@@ -29,6 +31,11 @@ public class RegistrationSuite implements Module
       openRegisterPage(driver);
    }
    
+   /**
+    * An unexpected pop up is coming recently on the website
+    * 
+    * @throws Exception
+    */
    public void removePopup() throws Exception {
       Util.scrollWindow(driver);
       driver.findElement(By.linkText("Registrieren")).click();
@@ -38,14 +45,18 @@ public class RegistrationSuite implements Module
    public void openRegisterPage(WebDriver driver) {
       try
       {
-         removePopup();
+         try {
+            removePopup();
+         } catch(Exception e){
+            
+         }
          Util.scrollWindow(driver);
-         WebElement registerForm = driver.findElement(By.className("RegisterPage"));
-         registerForm.findElement(By.xpath("form/input[2]")).click();
-         Thread.sleep(1000);
+         WebElement registerForm = Util.fluentWait(By.className("RegisterPage"), driver, 30, 5); //parent of checkbox
+         registerForm.findElement(By.xpath("form/input[2]")).click(); // clicking on checkbox
+         Thread.sleep(1000); //wait
          
-         
-         driver.findElement(By.id("registersubmitID")).click();
+         WebElement submitForm = driver.findElement(By.className("RegisterSubmit"));
+         submitForm.findElement(By.xpath("input[3]")).click(); //clicking Registrieren mit Authega  button
          
       }
       catch (Exception e)

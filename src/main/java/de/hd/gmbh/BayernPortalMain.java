@@ -1,6 +1,9 @@
-package com.test;
+package de.hd.gmbh;
 
 import java.util.Scanner;
+/**
+ * @author Liridon
+ */
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -10,6 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.test.Util;
 import com.test.gmail.GmailLogin;
 
 public class BayernPortalMain
@@ -23,7 +27,6 @@ public class BayernPortalMain
    @BeforeClass(alwaysRun = true)
    public void setUp() throws Exception
    {
-      
       System.out.println("Please choose browser type:");
       System.out.println("1 - Chrome");
       System.out.println("2 - Firefox");
@@ -51,6 +54,23 @@ public class BayernPortalMain
       
       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
       driver.manage().window().maximize();
+   }
+   
+   public static void main(String args[]) throws Exception {
+      if(args[0].contains(chromeIdentifier)) {
+         System.setProperty("webdriver.chrome.driver", args[0].replace(chromeIdentifier, ""));
+         driver = new ChromeDriver();
+      } else if(args[0].contains(mozIdentifier)) {
+         System.setProperty("webdriver.gecko.driver", args[0].replace(mozIdentifier, ""));
+         driver = new FirefoxDriver();
+      } else {
+         System.out.println("Error: Driver type is not defined. System will exit.");
+         throw new Exception("Error: Driver type is not defined.");
+      }
+      
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+      driver.manage().window().maximize();
+      register();
    }
 
    @Test
