@@ -16,3 +16,4 @@ lib/*
 testng.xml
 data/*
 images/*
+backup/*
