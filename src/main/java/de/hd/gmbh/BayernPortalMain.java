@@ -13,8 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.test.Util;
-import com.test.gmail.GmailLogin;
+import de.hd.gmbh.gmail.GmailLogin;
 
 public class BayernPortalMain
 {
@@ -24,6 +23,7 @@ public class BayernPortalMain
    
    public static String mozIdentifier = "--firefox=";
    
+   @SuppressWarnings("resource")
    @BeforeClass(alwaysRun = true)
    public void setUp() throws Exception
    {

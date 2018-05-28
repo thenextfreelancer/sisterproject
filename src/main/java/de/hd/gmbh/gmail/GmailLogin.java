@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import com.test.BayernPortalMain;
-import com.test.Util;
+import de.hd.gmbh.BayernPortalMain;
+import de.hd.gmbh.Util;
 
 public class GmailLogin
 {
